@@ -4,7 +4,7 @@ use rand::prelude::*;
 // use rand_chacha::ChaCha20Rng;
 
 #[allow(dead_code)]
-pub fn cellnoise (seed: u32, rnd_tab_size: usize) -> Box<dyn Fn(f32) -> f32> {
+pub fn gen_cellnoise (rnd_tab_size: usize, seed: u32) -> Box<dyn Fn(f32) -> f32> {
     let mut data = Vec::new();
     data.resize(rnd_tab_size, seed);
     rand::thread_rng().fill(&mut data[..]);
@@ -28,7 +28,7 @@ mod tests {
 
     #[test]
     fn test_name() {
-        let celln = cellnoise(0, 32);
+        let celln = gen_cellnoise(32, 0);
         for x in  1..30 {
             eprintln!("{:?}", celln(x as f32) );
         }
