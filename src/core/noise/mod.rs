@@ -1,10 +1,9 @@
-// NoiseFactory2D is a noise generator
-
+// Non-differentiable random generators.
 mod cellnoise;
 mod hash;
 
 /*
-A noise function needs to be differentiable.
+A NoiseFactory generates a noise which is differentiable.
 */
 pub trait NoiseFactory <Input,Output>{
     fn gen_noise(self) -> Box<dyn Fn (Input) -> Output>;
