@@ -1,7 +1,0 @@
-/*
-
-*/
-
-trait Evaluator {
-    fn eval()
-}

@@ -2,6 +2,6 @@
 
 */
 
-use evaluate;
-use node;
-use graph;
+mod slot;
+mod node;
+mod graph;
