@@ -6,17 +6,11 @@
     This is how data is represented in pachamama. PType is a shortcut for Pachamama Type.
 */
 
-pub struct PType  {
-    name: String,
-    id: usize,
-    ty: PT_Descr,
-}
-
 /*
     Type descriptor.
 */
 
-enum PT_Descr {
+pub enum PType {
     String(String),
     Integer(i32),
     Float(f32),
