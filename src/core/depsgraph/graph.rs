@@ -2,11 +2,14 @@
 
 */
 
-use super::node::Node;
-use crate::core::context::{Context, evaluator::Evaluator};
+use super::{slot::Slot, node::Node};
+use crate::core::{
+    utils::typedefs::Key,
+    context::{Context, evaluator::Evaluator}
+};
 
 use std::{
-    sync::atomic::AtomicUsize,
+    sync::{Arc},
     collections::{BTreeMap, BTreeSet}
 };
 
@@ -14,21 +17,19 @@ use std::{
 
 */
 
-type Key = usize; // Graph node index
-
-
-
 struct Connection {
-    from: AtomicUsize,
-    from_output: AtomicUsize,
-    to: AtomicUsize,
-    to_output: AtomicUsize,
+    from: Key,
+    from_output: Key,
+    to: Key,
+    to_output: Key,
 }
 
-struct Graph {
-    key_counter: AtomicUsize,
-    nodes: BTreeMap<AtomicUsize,Node>,
+pub struct Graph {
+    key_counter: Key,
+    nodes: BTreeMap<Key,Arc<Node>>,
     connections: BTreeSet<Connection>,
+    input: Vec<Slot>,
+    output: Vec<Slot>,
 }
 
 impl Graph {
@@ -44,5 +45,5 @@ impl Graph {
 }
 
 impl Evaluator for Graph {
-    fn eval(&self, context: Context) { unimplemented!() }
+    fn eval(&self, context: Context, inputs: Vec<Slot>) -> Vec<Slot>{ unimplemented!() }
 }

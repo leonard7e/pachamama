@@ -2,6 +2,6 @@
 
 */
 
-mod slot;
-mod node;
-mod graph;
+pub mod slot;
+pub mod node;
+pub mod graph;
