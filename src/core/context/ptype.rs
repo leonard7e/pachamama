@@ -12,6 +12,10 @@
 
 use crate::core::utils::typedefs::Scalar;
 
+pub trait PType {
+    fn pt_id() -> PT_Descr;
+}
+
 pub enum PT_Descr {
     PT_String,
     PT_Integer,
@@ -24,10 +28,7 @@ pub enum PT_Descr {
     // P_Node
 }
 
-pub trait PType {
-    fn pt_id() -> PT_Descr;
-}
-
+// Implement basic types for pachamama
 
 impl PType for i32 {
     fn pt_id() -> PT_Descr { PT_Descr::PT_Integer }
