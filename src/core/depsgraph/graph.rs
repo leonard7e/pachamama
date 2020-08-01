@@ -5,7 +5,7 @@
 use super::{slot::Slot, node::Node};
 use crate::core::{
     utils::typedefs::Key,
-    context::Context
+    context::{ptype::PType, Context}
 };
 
 use std::{
@@ -25,15 +25,15 @@ struct Connection {
     to_input: Key,
 }
 
-pub struct Graph <N: Node> {
+pub struct Graph <T: PType, N: Node<T>> {
     key_counter: Key,
     nodes: BTreeMap<Key,Arc<N>>,
     connections: BTreeSet<Connection>,
-    input: Vec<Slot>,
-    output: Vec<Slot>,
+    input: Vec<Slot<T>>,
+    output: Vec<Slot<T>>,
 }
 
-impl <N: Node> Graph<N> {
+impl <T: PType, N: Node<T>> Graph<T,N> {
     fn key_step(&mut self) -> Key {
         let k = self.key_counter;
         self.key_counter += 1;
@@ -70,5 +70,5 @@ impl <N: Node> Graph<N> {
             return Err("Graph error: could not establish connection")
         }
     }
-    fn eval(&self, context: Context, inputs: Vec<Slot>) -> Vec<Slot>{ unimplemented!() }
+    fn eval(&self, context: Context<T>, inputs: Vec<Slot<T>>) -> Vec<Slot<T>>{ unimplemented!() }
 }

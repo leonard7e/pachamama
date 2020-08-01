@@ -12,15 +12,47 @@
 
 use crate::core::utils::typedefs::Scalar;
 
-pub enum PType {
-    String(String),
-    Integer(i32),
-    Float(Scalar),
-    Vector2([Scalar; 2]),
-    Vector3([Scalar; 3]),
-    Matrix3x3([[Scalar;3];3]),
-    Matrix4x4([[Scalar;4];4]),
-    //
-    // Closure([PT_Descr], [PT_Descr]),
-    // Structure([PT_Descr]),
+pub enum PT_Descr {
+    PT_String,
+    PT_Integer,
+    PT_Scalar,
+    PT_Vector2,
+    PT_Vector3,
+    PT_Vector4,
+    PT_Matrix3x3,
+    PT_Matrix4x4,
+    // P_Node
+}
+
+pub trait PType {
+    fn pt_id() -> PT_Descr;
+}
+
+
+impl PType for i32 {
+    fn pt_id() -> PT_Descr { PT_Descr::PT_Integer }
+}
+
+impl PType for Scalar {
+    fn pt_id() -> PT_Descr { PT_Descr::PT_Scalar }
+}
+
+impl PType for [Scalar; 2] {
+    fn pt_id() -> PT_Descr { PT_Descr::PT_Vector2 }
+}
+
+impl PType for [Scalar; 3] {
+    fn pt_id() -> PT_Descr { PT_Descr::PT_Vector3 }
+}
+
+impl PType for [Scalar; 4] {
+    fn pt_id() -> PT_Descr { PT_Descr::PT_Vector4 }
+}
+
+impl PType for [[Scalar;3];3] {
+    fn pt_id() -> PT_Descr { PT_Descr::PT_Matrix3x3 }
+}
+
+impl PType for [[Scalar;4];4] {
+    fn pt_id() -> PT_Descr { PT_Descr::PT_Matrix4x4 }
 }

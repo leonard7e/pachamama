@@ -6,7 +6,7 @@ use ptype::PType;
 use std::sync::Arc;
 use super::utils::typedefs::Key;
 
-pub struct Context {
+pub struct Context <T:PType>{
     symbol_tbl: BTreeMap<String, Key>,
-    types: BTreeMap<Key, Arc<PType>>,
+    types: BTreeMap<Key, Arc<T>>,
 }
