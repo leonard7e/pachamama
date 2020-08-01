@@ -17,11 +17,12 @@ use std::{
 
 */
 
+#[derive(PartialOrd, PartialEq, Eq, Ord)]
 struct Connection {
     from: Key,
     from_output: Key,
     to: Key,
-    to_output: Key,
+    to_input: Key,
 }
 
 pub struct Graph {
@@ -33,14 +34,24 @@ pub struct Graph {
 }
 
 impl Graph {
+    fn key_step(&mut self) -> Key {
+        let k = self.key_counter;
+        self.key_counter += 1;
+        k
+    }
     fn validate(&self) -> Result<(), ()> {
         /* Outside modules should not bother about validation */
         unimplemented!()
     }
 
-    pub fn insert(&mut self, node: &mut Node) -> Option<Key> {
-        /* Make sure self is still valid after insert node. */
-        unimplemented!()
+    pub fn insert(&mut self, node: Node) -> Option<Key> {
+        let k = self.key_step();
+        self.nodes.insert(k, Arc::new(node));
+        Some(k)
+    }
+
+    fn connect(&mut self, c: Connection) -> () {
+        self.connections.insert(c);
     }
 }
 
