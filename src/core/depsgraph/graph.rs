@@ -5,7 +5,7 @@
 use super::{slot::Slot, node::Node};
 use crate::core::{
     utils::typedefs::Key,
-    context::{Context, evaluator::Evaluator}
+    context::Context
 };
 
 use std::{
@@ -70,8 +70,5 @@ impl <N: Node> Graph<N> {
             return Err("Graph error: could not establish connection")
         }
     }
-}
-
-impl <N:Node> Evaluator for Graph<N> {
     fn eval(&self, context: Context, inputs: Vec<Slot>) -> Vec<Slot>{ unimplemented!() }
 }

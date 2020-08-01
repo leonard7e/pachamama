@@ -1,5 +1,4 @@
 pub mod ptype;
-pub mod evaluator;
 
 use std::collections::BTreeMap;
 use ptype::PType;

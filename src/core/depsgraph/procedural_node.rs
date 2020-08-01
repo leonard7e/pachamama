@@ -1,4 +1,3 @@
-use crate::core::context::evaluator::Evaluator;
 use crate::core::{utils::typedefs::Key, context::{ptype::PType, Context}};
 
 use super::{node::Node, slot::Slot};
@@ -17,9 +16,6 @@ impl Node for ProceduralNode {
     fn has_output_slot(&self, s: &Key) -> bool {
         unimplemented!()
     }
-}
-
-impl Evaluator for ProceduralNode {
     fn eval(&self, context: Context, inputs: Vec<Slot>) -> Vec<Slot>  {
         (self.procedure)(context, inputs)
     }
