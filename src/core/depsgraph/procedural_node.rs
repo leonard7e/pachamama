@@ -11,10 +11,10 @@ pub struct ProceduralNode{
 }
 
 impl Node for ProceduralNode {
-    fn has_input_slot(&self, s: Key) -> bool {
+    fn has_input_slot(&self, s: &Key) -> bool {
         unimplemented!()
     }
-    fn has_output_slot(&self, s: Key) -> bool {
+    fn has_output_slot(&self, s: &Key) -> bool {
         unimplemented!()
     }
 }
