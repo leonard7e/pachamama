@@ -2,7 +2,7 @@
 
 */
 
-use super::{slot::Slot, node::Node};
+use super::{slot::{SlotMap, Slot}, node::Node};
 use crate::core::{
     utils::typedefs::Key,
     context::{ptype::PType, Context}
@@ -29,8 +29,8 @@ pub struct Graph <T: PType, N: Node<T>> {
     key_counter: Key,
     nodes: BTreeMap<Key,Arc<N>>,
     connections: BTreeSet<Connection>,
-    input: Vec<Slot<T>>,
-    output: Vec<Slot<T>>,
+    input: SlotMap<T>,
+    output: SlotMap<T>,
 }
 
 impl <T: PType, N: Node<T>> Graph<T,N> {
