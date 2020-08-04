@@ -3,7 +3,7 @@
 */
 
 pub mod slot;
-pub mod node;
+pub mod trait_node;
 
-pub mod graph;
-pub mod procedural_node;
+pub mod node_graph;
+pub mod node_procedural;
