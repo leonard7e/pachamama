@@ -24,9 +24,27 @@ use std::{
     Only nodes which do have a path to the output node are used in evaluation.
 */
 
-pub struct Graph<T: PType, N: Node<SlotType=T>> {
+pub struct Graph<N: Node> {
     key_counter: Key,
     nodes: BTreeMap<Key, BTreeMap<Key, Arc<N>>>,
-    inputs: SlotMap<T>,
-    outputs: SlotMap<T>,
+    node_input: Key,
+    node_output: Key,
+}
+
+impl <T: PType, N:Node<SlotType=T>> Node for Graph<N> {
+    type SlotType = T;
+
+    fn eval(
+        &self,
+        context: Context<Self::SlotType>,
+        input: Vec<Slot<Self::SlotType>>,
+    ) -> Vec<Slot<Self::SlotType>> {
+        todo!()
+    }
+    fn get_input_slots(&self) -> &SlotMap<Self::SlotType> {
+        todo!()
+    }
+    fn get_output_slots(&self) -> &SlotMap<Self::SlotType> {
+        todo!()
+    }
 }

@@ -14,4 +14,3 @@ pub struct Slot <T: PType>{
 
 
 pub type SlotMap <T: PType> = BTreeMap<Key, Slot<T>>;
-pub type SlotIter <'a, T: PType > = btree_map::Iter<'a, Key,Slot<T>>;

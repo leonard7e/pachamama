@@ -1,6 +1,6 @@
 use crate::core::{utils::typedefs::Key, context::{ptype::PType, Context}};
 
-use super::{trait_node::Node, slot::{SlotMap, Slot, SlotIter}};
+use super::{trait_node::Node, slot::{SlotMap, Slot}};
 
 pub struct ProceduralNode<T: PType>{
     pub name: String,
