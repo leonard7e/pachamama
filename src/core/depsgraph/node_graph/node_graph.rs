@@ -26,9 +26,9 @@ use std::{
 
 pub struct Graph<N: Node> {
     key_counter: Key,
-    nodes: BTreeMap<Key, BTreeMap<Key, Arc<N>>>,
-    node_input: Key,
-    node_output: Key,
+    nodes: BTreeMap<Key, Arc<N>>,
+    ref_node_input: Key,
+    ref_node_output: Key,
 }
 
 impl <T: PType, N:Node<SlotType=T>> Node for Graph<N> {
@@ -42,9 +42,11 @@ impl <T: PType, N:Node<SlotType=T>> Node for Graph<N> {
         todo!()
     }
     fn get_input_slots(&self) -> &SlotMap<Self::SlotType> {
-        todo!()
+        let out_node = self.nodes[&self.ref_node_input].as_ref();
+        out_node.get_output_slots()
     }
     fn get_output_slots(&self) -> &SlotMap<Self::SlotType> {
-        todo!()
+        let out_node = self.nodes[&self.ref_node_output].as_ref();
+        out_node.get_input_slots()
     }
 }
