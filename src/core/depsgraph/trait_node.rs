@@ -7,20 +7,22 @@
 */
 
 use crate::core::{
-    context::{ptype::PType, Context},
+    context::Context,
     utils::typedefs::Key,
 };
 
-use super::slot::{Slot, SlotMap};
+use super::slot::Slot;
+use std::collections::BTreeMap;
+
+pub type SlotMap = BTreeMap<Key, Slot>;
 
 pub trait Node {
-    type SlotType: PType;
     fn eval(
         &self,
-        context: Context<Self::SlotType>,
-        input: Vec<Slot<Self::SlotType>>,
-    ) -> Vec<Slot<Self::SlotType>>;
+        context: Context,
+        input: Vec<Slot>,
+    ) -> Vec<Slot>;
 
-    fn get_input_slots(&self) -> &SlotMap<Self::SlotType>;
-    fn get_output_slots(&self) -> &SlotMap<Self::SlotType>;
+    fn get_input_slots(&self) -> &SlotMap;
+    fn get_output_slots(&self) -> &SlotMap;
 }
