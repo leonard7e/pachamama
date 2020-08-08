@@ -1,22 +1,21 @@
-use crate::core::{utils::typedefs::Key, context::{ptype::PType, Context}};
+use crate::core::context::Context;
 
-use super::{trait_node::Node, slot::{SlotMap, Slot}};
+use super::{trait_node::{SlotTypes, Node}, slot::Slot};
 
-pub struct NodeProcedural<T: PType>{
-    pub procedure: Box<dyn Fn(Context<T>, Vec<Slot<T>>) -> Vec<Slot<T>>>,
-    pub inputs: SlotMap<T>,
-    pub outputs: SlotMap<T>
+pub struct NodeProcedural{
+    pub procedure: Box<dyn Fn(Context, Vec<Slot>) -> Vec<Slot>>,
+    inputs: SlotTypes,
+    outputs: SlotTypes,
 }
 
-impl <T: PType> Node for NodeProcedural<T> {
-    type SlotType = T;
-    fn eval(&self, context: Context<T>, inputs: Vec<Slot<T>>) -> Vec<Slot<T>>  {
+impl Node for NodeProcedural {
+    fn eval(&self, context: Context, inputs: Vec<Slot>) -> Vec<Slot>  {
         (self.procedure)(context, inputs)
     }
-    fn get_input_slots(&self) -> &SlotMap<Self::SlotType> {
+    fn get_input_slot_types(&self) -> &SlotTypes {
         &self.inputs
     }
-    fn get_output_slots(&self) -> &SlotMap<Self::SlotType> {
+    fn get_output_slot_types(&self) -> &SlotTypes {
         &self.outputs
     }
 }

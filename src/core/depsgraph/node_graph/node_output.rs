@@ -1,25 +1,23 @@
 /*
 */
-use crate::core::{depsgraph::{trait_node::Node, slot::SlotMap}, context::ptype::PType};
+use crate::core::{depsgraph::trait_node::{Node, SlotTypes}, context::ptype::PType};
 
-pub struct NodeOutput<T: PType>{
-    pub inputs: SlotMap<T>,
+pub struct NodeOutput{
+    pub inputs: SlotTypes,
 }
 
-impl <T: PType> Node for NodeOutput<T> {
-    type SlotType= T;
+impl Node for NodeOutput {
     fn eval(
         &self,
-        context: crate::core::context::Context<Self::SlotType>,
-        input: Vec<crate::core::depsgraph::slot::Slot<Self::SlotType>>,
-    ) -> Vec<crate::core::depsgraph::slot::Slot<Self::SlotType>> {
+        context: crate::core::context::Context,
+        input: Vec<crate::core::depsgraph::slot::Slot>,
+    ) -> Vec<crate::core::depsgraph::slot::Slot> {
         panic!("Output node does not support evaluation.")
     }
-    fn get_input_slots(&self) -> &SlotMap<Self::SlotType> {
+    fn get_input_slot_types(&self) -> &SlotTypes {
         &self.inputs
     }
-    fn get_output_slots(&self) -> &SlotMap<Self::SlotType> {
+    fn get_output_slot_types(&self) -> &SlotTypes {
         panic!("Output node does not have output slots.")
     }
-
 }

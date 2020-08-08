@@ -3,8 +3,8 @@
 */
 
 use crate::core::depsgraph::{
-    slot::{Slot, SlotMap},
-    trait_node::Node,
+    slot::Slot,
+    trait_node::{Node, SlotTypes},
 };
 use crate::core::{
     context::{ptype::PType, Context},
@@ -24,29 +24,27 @@ use std::{
     Only nodes which do have a path to the output node are used in evaluation.
 */
 
-pub struct Graph<N: Node> {
+pub struct Graph {
     key_counter: Key,
-    nodes: BTreeMap<Key, Arc<N>>,
+    nodes: BTreeMap<Key, Arc<dyn Node>>,
     ref_node_input: Key,
     ref_node_output: Key,
 }
 
-impl <T: PType, N:Node<SlotType=T>> Node for Graph<N> {
-    type SlotType = T;
-
+impl Node for Graph {
     fn eval(
         &self,
-        context: Context<Self::SlotType>,
-        input: Vec<Slot<Self::SlotType>>,
-    ) -> Vec<Slot<Self::SlotType>> {
+        context: Context,
+        input: Vec<Slot>,
+    ) -> Vec<Slot> {
         todo!()
     }
-    fn get_input_slots(&self) -> &SlotMap<Self::SlotType> {
+    fn get_input_slot_types(&self) -> &SlotTypes {
         let out_node = self.nodes[&self.ref_node_input].as_ref();
-        out_node.get_output_slots()
+        out_node.get_output_slot_types()
     }
-    fn get_output_slots(&self) -> &SlotMap<Self::SlotType> {
+    fn get_output_slot_types(&self) -> &SlotTypes {
         let out_node = self.nodes[&self.ref_node_output].as_ref();
-        out_node.get_input_slots()
+        out_node.get_input_slot_types()
     }
 }
