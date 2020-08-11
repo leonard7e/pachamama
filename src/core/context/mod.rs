@@ -8,3 +8,9 @@ use super::utils::typedefs::Key;
 
 pub struct Context {
 }
+
+impl Context {
+    pub fn new() -> Self {
+        Context {}
+    }
+}
