@@ -15,6 +15,7 @@ use std::{
     collections::{BTreeMap, BTreeSet},
     sync::Arc,
 };
+use super::interface::Interface;
 
 /*
     Please keep in mind, this graph is a directed graph. While data
@@ -29,6 +30,24 @@ pub struct Graph {
     nodes: BTreeMap<Key, Arc<dyn Node>>,
     ref_node_input: Key,
     ref_node_output: Key,
+}
+
+impl Graph {
+    pub fn new() -> Self {
+        let input = Interface::new(); // TODO
+        let output = Interface::new(); // TODO
+        let nodes = BTreeMap::new();
+        // Node 0 is input node
+        // Node 1 is output node
+        nodes.insert(0,input);
+        nodes.insert(1,output);
+        Graph {
+            key_counter: 2,
+            nodes: nodes,
+            ref_node_input: 0,
+            ref_node_output: 0
+        }
+    }
 }
 
 impl Node for Graph {

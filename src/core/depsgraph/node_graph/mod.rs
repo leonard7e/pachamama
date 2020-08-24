@@ -1,3 +1,2 @@
-mod node_graph;
-mod node_input;
-mod node_output;
+mod interface;
+pub mod graph;

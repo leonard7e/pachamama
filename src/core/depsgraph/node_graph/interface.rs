@@ -2,11 +2,20 @@
 */
 use crate::core::{depsgraph::trait_node::{Node, SlotTypes}, context::ptype::PType};
 
-pub struct NodeInput{
-    pub inputs: SlotTypes,
+pub struct Interface{
+    pub params: SlotTypes,
 }
 
-impl Node for NodeInput {
+impl Interface {
+    pub fn new() -> Self {
+        let slots = SlotTypes::new();
+        Interface {
+            params: slots
+        }
+    }
+}
+
+impl Node for Interface {
     fn eval(
         &self,
         context: crate::core::context::Context,
