@@ -21,13 +21,13 @@ impl Node for Interface {
         context: crate::core::context::Context,
         input: Vec<crate::core::depsgraph::slot::Slot>,
     ) -> Vec<crate::core::depsgraph::slot::Slot> {
-        panic!("Input node does not support evaluation.")
+        panic!("Graph interface does not support evaluation.")
     }
     fn get_input_slot_types(&self) -> &SlotTypes {
-        panic!("Input node does not have input slots.")
+        &self.params
     }
     fn get_output_slot_types(&self) -> &SlotTypes {
-        &self.inputs
+        &self.params
     }
 
 }
