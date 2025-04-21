@@ -1,7 +1,9 @@
+[workspace]
+members = [ "pachamama-core","pachamama-io", "pachamama-py"]
+
 [package]
 name = "pachamama"
 version = "0.1.0"
-authors = ["Leonard Siebeneicher <leonard7e@gmail.com>"]
-edition = "2018"
+edition = "2024"
 
 [dependencies]
